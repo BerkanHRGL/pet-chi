@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'Pavanam';
+    src: url('fonts/Pavanam-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: "Paytone One", sans-serif;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.startup-screen {
+    background-color: #ffffff;
+}
+
+.pet-logo {
+    text-align: center;
+    animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.welcome-screen {
+    background-color: #ffffff;
+}
+
+.welcome-content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    width: 90%;
+}
+
+
+.pet-image {
+    width: clamp(80px, 25vw, 120px); 
+    height: clamp(80px, 25vw, 120px);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+}
+
+
+.app-name {
+    font-size: clamp(32px, 8vw, 48px); 
+    font-weight: bold;
+    color: #333;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: clamp(16px, 4vw, 18px);
+    color: #666;
+    margin-bottom: 40px;
+    margin-top: -12px;
+    line-height: 1.4;
+    font-family: 'Pavanam', sans-serif; 
+}
+
+.start-button {
+    background-color: #FAB051;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 16px 32px;
+    font-size: clamp(16px, 4vw, 18px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 200px;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.start-button:active {
+    transform: scale(0.96);
+    background-color: #D4A853;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .start-button:hover {
+        background-color: #E8B86D;
+        transform: none;
+    }
+    
+    .pet-image:hover {
+        transform: none;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .start-button:hover {
+        background-color: #D4A853;
+        transform: translateY(-2px);
+    }
+    
+    .pet-image:hover {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes gentle-bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .welcome-content {
+        padding: 30px 15px;
+    }
+    
+    .pet-image {
+        margin-bottom: 15px;
+    }
+    
+    .tagline {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .welcome-content {
+        padding: 20px 10px;
+    }
+}
