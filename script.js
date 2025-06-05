@@ -38,3 +38,14 @@ window.addEventListener('orientationchange', function() {
         window.scrollTo(0, 0);
     }, 500);
 });
+
+function startJourney() {
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    
+    console.log('Starting journey!');
+    
+    // Navigate to naming screen
+    window.location.href = 'name-pet.html';
+}

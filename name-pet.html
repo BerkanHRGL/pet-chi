@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Petchi">
+    
+    <title>Name Your Petchi</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen name-pet-screen active">
+<div class="name-pet-content">
+    <div class="pet-and-question">
+        <div class="pet-container">
+            <img src="imgs/petchi-happy.png" alt="Petchi" class="pet-image">
+        </div>
+        
+        <div class="question-section">
+            <h2 class="question-text">
+                What do you want to call your <span class="highlight">Petchi</span>?
+            </h2>
+        </div>
+    </div>
+    
+    <div class="bottom-controls">
+        <div class="input-section">
+            <input type="text" 
+                   class="name-input" 
+                   placeholder="Tommy" 
+                   id="petNameInput" 
+                   maxlength="20">
+        </div>
+        
+        <div class="button-section">
+            <button class="next-button" onclick="confirmName()">Next</button>
+        </div>
+    </div>
+</div>
+
+    <script src="name-pet.js"></script>
+</body>
+</html>
