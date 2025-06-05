@@ -63,8 +63,8 @@ body {
 
 
 .pet-image {
-    width: clamp(80px, 25vw, 120px); 
-    height: clamp(80px, 25vw, 120px);
+    width: clamp(180px, 40vw, 180px);
+    height: clamp(180px, 40vw, 180px);
     margin-bottom: 20px;
     transition: transform 0.2s ease;
 }
@@ -216,6 +216,226 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+
+.ask-name-screen {
+    background-color: #ffffff;
+}
+
+.ask-name-content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.speech-bubble {
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    margin-bottom: -160px;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 35px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #f0f0f0;
+}
+
+.tommy-speech {
+    font-size: clamp(16px, 4vw, 18px);
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+    font-family: 'Pavanam', sans-serif;
+}
+
+.ask-name-content .pet-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ask-name-content .bottom-controls {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ask-name-content .pet-image {
+    width: clamp(180px, 40vw, 180px);
+    height: clamp(180px, 40vw, 180px);
+}
+
+/* Intro Explanation Screen */
+.intro-screen {
+    background-color: #ffffff;
+}
+
+.intro-content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: space-between;
+}
+
+.intro-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.intro-title {
+    font-size: clamp(24px, 6vw, 32px);
+    color: #333;
+    line-height: 1.2;
+    font-weight: bold;
+    margin: 0;
+}
+
+.intro-description {
+    font-size: clamp(16px, 4vw, 18px);
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+    font-family: 'Pavanam', sans-serif;
+}
+
+.intro-content .pet-container {
+    margin: 20px 0;
+}
+
+.intro-content .pet-image {
+    width: clamp(120px, 30vw, 160px);
+    height: clamp(120px, 30vw, 160px);
+    animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.intro-content .button-section {
+    flex: 0 0 auto;
+}
+
+/* Meet User Screen */
+.meet-user-screen {
+    background-color: #ffffff;
+}
+
+.meet-user-content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: space-between;
+}
+
+.meet-user-content .speech-bubble {
+    flex: 0 0 auto;
+}
+
+.meet-user-content .pet-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meet-user-content .button-section {
+    flex: 0 0 auto;
+}
+
+/* First Goal Screen */
+.first-goal-screen {
+    background-color: #ffffff;
+}
+
+.first-goal-content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: space-between;
+}
+
+.first-goal-content .speech-bubble {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+.first-goal-content .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #f0f0f0;
+}
+
+.first-goal-content .pet-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.first-goal-content .pet-image {
+    width: clamp(160px, 35vw, 180px);
+    height: clamp(160px, 35vw, 180px);
+    animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.tip-section {
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+}
+
+.tip-text {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+    font-family: 'Pavanam', sans-serif;
+    padding: 0 10px;
+}
+
+.first-goal-content .button-section {
+    flex: 0 0 auto;
 }
 
 @media screen and (max-width: 414px) {

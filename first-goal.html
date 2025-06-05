@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Petchi">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <title>First Goal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen first-goal-screen active">
+        <div class="first-goal-content">
+            <div class="speech-bubble">
+                <p class="tommy-speech" id="greetingText">Alright, let's start by adding your first goal!</p>
+            </div>
+            
+            <div class="pet-container">
+                <img src="imgs/petchi-happy.png" alt="Tommy the Pet" class="pet-image">
+            </div>
+            
+            <div class="tip-section">
+                <p class="tip-text">Tip: Start with something small and easy, even "drink a glass of water" counts! Tommy loves celebrating any win!</p>
+            </div>
+            
+            <div class="button-section">
+                <button class="next-button" onclick="proceedToGoalInput()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="first-goal.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Petchi">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <title>Meet Your Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen ask-name-screen active">
+        <div class="ask-name-content">
+            <div class="speech-bubble">
+                <p class="tommy-speech" id="tommySpeech">Loading...</p>
+            </div>
+            
+            <div class="pet-container">
+                <img src="imgs/petchi-happy.png" alt="Pet" class="pet-image" id="petImage">
+            </div>
+            
+            <div class="bottom-controls">
+                <div class="input-section">
+                    <input type="text" 
+                           class="name-input" 
+                           placeholder="Your name" 
+                           id="userNameInput" 
+                           maxlength="20">
+                </div>
+                
+                <div class="button-section">
+                    <button class="next-button" onclick="confirmUserName()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ask-user-name.js"></script>
+</body>
+</html>

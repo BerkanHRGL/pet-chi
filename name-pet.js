@@ -35,11 +35,13 @@ function confirmName() {
     // Save pet name to localStorage
     localStorage.setItem('petName', petName);
     
+    // Add haptic feedback
     if (navigator.vibrate) {
         navigator.vibrate(50);
     }
     
     console.log(`Pet named: ${petName}`);
     
-    alert(`Great! Your pet is now named ${petName}!`);
+    // Navigate to ask user name screen
+    window.location.href = 'ask-user-name.html';
 }

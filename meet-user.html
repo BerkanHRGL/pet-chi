@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Petchi">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <title>Nice to Meet You</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen meet-user-screen active">
+        <div class="meet-user-content">
+            <div class="speech-bubble">
+                <p class="tommy-speech" id="meetUserSpeech">Loading...</p>
+            </div>
+            
+            <div class="pet-container">
+                <img src="imgs/petchi-happy.png" alt="Pet" class="pet-image">
+            </div>
+            
+            <div class="button-section">
+                <button class="next-button" onclick="goToExplanation()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="meet-user.js"></script>
+</body>
+</html>
