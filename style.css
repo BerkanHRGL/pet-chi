@@ -5,7 +5,6 @@
     font-style: normal;
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +19,11 @@ body {
     -webkit-user-select: none;
     user-select: none;
     -webkit-overflow-scrolling: touch;
+}
+
+body.homepage-active {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .screen {
@@ -61,14 +65,12 @@ body {
     width: 90%;
 }
 
-
 .pet-image {
     width: clamp(180px, 40vw, 180px);
     height: clamp(180px, 40vw, 180px);
     margin-bottom: 20px;
     transition: transform 0.2s ease;
 }
-
 
 .app-name {
     font-size: clamp(32px, 8vw, 48px); 
@@ -217,7 +219,6 @@ body {
     flex-direction: column;
     gap: 5px;
 }
-
 
 .ask-name-screen {
     background-color: #ffffff;
@@ -438,9 +439,496 @@ body {
     flex: 0 0 auto;
 }
 
+.homepage-screen {
+    background: #F7835A;
+    position: static;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: visible;
+    padding: 0;
+}
+
+.homepage-content {
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0;
+}
+
+.pet-display {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 60vh;
+    max-height: none;
+    margin: 0;
+    padding: 0; 
+}
+
+.pet-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.pet-character {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.pet-sprite {
+    width: clamp(120px, 30vw, 160px);
+    height: clamp(120px, 30vw, 160px);
+    object-fit: contain;
+    transition: all 0.3s ease;
+    animation: gentle-breathing 3s ease-in-out infinite;
+}
+
+.pet-sprite.happy {
+    animation: happy-bounce 1s ease-in-out infinite;
+}
+
+.pet-sprite.sad {
+    animation: sad-droop 2s ease-in-out infinite;
+    filter: brightness(0.8);
+}
+
+/* Goals Progress Section */
+.goals-section {
+    flex: 0 0 auto;
+    background-color: #EC6E4B;
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.goals-header h3 {
+    font-size: clamp(16px, 4vw, 20px);
+    color: #333;
+    margin: 0 0 15px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.progress-container {
+    position: relative;
+}
+
+.progress-bar {
+    background-color: #EC6E4B;
+    border-radius: 25px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #fff; 
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    height: 100%;
+    width: 0%;
+    border-radius: 22px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(18px, 4vw, 22px);
+    font-weight: bold;
+    color: #333;
+    z-index: 2;
+}
+
+/* Goals List */
+.goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.goal-item {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.goal-item.completed {
+    background-color: #f8f8f8;
+    opacity: 0.8;
+}
+
+.goal-text {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: #333;
+    font-family: 'Pavanam', sans-serif;
+    font-weight: 500;
+    flex: 1;
+    margin: 0;
+}
+
+.goal-item.completed .goal-text {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.goal-checkbox {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.goal-checkbox.completed {
+    background-color: #4CAF50;
+}
+
+.goal-checkbox:active {
+    transform: scale(0.9);
+}
+
+.checkmark {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.goals-list:empty::after {
+    content: "";
+    display: none;
+}
+
+/* Action Section */
+.action-section {
+    flex: 0 0 auto;
+    margin: 0 20px 60px 20px;
+}
+
+.add-goal-button {
+    background: #FAB051;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    padding: 18px 32px;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(250, 176, 81, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: paytone one, sans-serif;
+
+}
+
+.add-goal-button:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(250, 176, 81, 0.6);
+}
+
+.add-goal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(250, 176, 81, 0.5);
+}
+
+/* Add Goal Screen */
+.add-goal-screen {
+    background: #F7835A;
+    position: static; 
+    height: auto;
+    min-height: 100vh;
+    overflow-y: visible;
+    padding: 0;
+}
+
+.add-goal-content {
+    padding: 0;
+    max-width: 100%; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0; 
+}
+
+.add-goal-content .pet-display {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw; 
+    height: 60vh; 
+    max-height: none; 
+    margin: 0;
+    padding: 0; 
+}
+
+.add-goal-content .pet-background {
+    position: relative;
+    width: 100%; 
+    height: 100%;
+    max-width: none;
+    max-height: none; 
+}
+
+.add-goal-content .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 0; 
+}
+
+.add-goal-content .pet-character {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.add-goal-content .pet-sprite {
+    width: clamp(120px, 30vw, 160px);
+    height: clamp(120px, 30vw, 160px);
+    object-fit: contain;
+    animation: gentle-breathing 3s ease-in-out infinite;
+}
+
+/* Add Goal Section */
+.add-goal-section {
+    background-color: #EC6E4B;
+    border-radius: 20px;
+    flex: 0 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 20px 60px 20px;
+}
+
+.add-goal-title {
+    font-size: clamp(18px, 4.5vw, 22px);
+    color: white;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.goal-input-container {
+    width: 100%;
+}
+
+.goal-input {
+    width: 100%;
+    padding: 18px 20px;
+    font-size: clamp(16px, 4vw, 18px);
+    border: none;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    font-family: 'Pavanam', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.goal-input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.goal-input::placeholder {
+    color: #999;
+    font-weight: 400;
+}
+
+.add-button {
+    background: #FAB051;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    padding: 18px 24px;
+    font-size: clamp(16px, 4vw, 18px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(250, 176, 81, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-end;
+    min-width: 0px;
+    font-family: paytone one, sans-serif;
+}
+
+.add-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.add-button:not(:disabled):active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(250, 176, 81, 0.6);
+}
+
+.add-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(250, 176, 81, 0.5);
+}
+
+/* Animations */
+@keyframes gentle-breathing {
+    0%, 100% {
+        transform: scale(1) translateY(0px);
+    }
+    50% {
+        transform: scale(1.02) translateY(-3px);
+    }
+}
+
+@keyframes happy-bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes sad-droop {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(2px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes gentle-bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile Optimizations */
 @media screen and (max-width: 414px) {
     .name-pet-content {
         padding: 30px 15px;
+    }
+    
+    .homepage-content {
+        padding: 0;
+        gap: 0;
+    }
+
+    .add-goal-content {
+        padding: 0;
+        gap: 0;
+    }
+    
+    .goals-section {
+        margin: 0 15px 15px 15px;
+        padding: 15px;
+    }
+
+    .action-section {
+        margin: 0 15px 60px 15px;
+    }
+    
+    .progress-bar {
+        height: 45px;
+    }
+    
+    .add-goal-section {
+        margin: 0 15px 60px 15px;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .goal-input {
+        padding: 16px 18px;
+    }
+    
+   .add-button {
+        padding: 16px 32px;
+    }
+
+    .progress-bar {
+        height: 45px;
     }
 }
 
@@ -463,15 +951,6 @@ body {
     
     .pet-image:hover {
         transform: scale(1.05);
-    }
-}
-
-@keyframes gentle-bounce {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
     }
 }
 

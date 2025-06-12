@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         nameInput.focus();
     }, 500);
     
-    // Enable/disable next button based on input
     nameInput.addEventListener('input', function() {
         const name = this.value.trim();
         if (name.length > 0) {
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Allow Enter key to proceed
     nameInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && this.value.trim().length > 0) {
             confirmName();
@@ -32,16 +30,13 @@ function confirmName() {
     
     if (petName.length === 0) return;
     
-    // Save pet name to localStorage
     localStorage.setItem('petName', petName);
     
-    // Add haptic feedback
     if (navigator.vibrate) {
         navigator.vibrate(50);
     }
     
     console.log(`Pet named: ${petName}`);
     
-    // Navigate to ask user name screen
     window.location.href = 'ask-user-name.html';
 }

@@ -24,7 +24,6 @@ function goToMainApp() {
     
     console.log('Going to first goal screen');
     
-    // Navigate to the first goal screen
     window.location.href = 'first-goal.html';
 }
 

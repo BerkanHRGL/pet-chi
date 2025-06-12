@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         userNameInput.focus();
     }, 500);
     
-    // Enable/disable next button based on input
     userNameInput.addEventListener('input', function() {
         const name = this.value.trim();
         if (name.length > 0) {
@@ -44,6 +43,5 @@ function confirmUserName() {
     
     console.log(`User name: ${userName}`);
     
-    // Navigate to meet user screen
     window.location.href = 'meet-user.html';
 }

@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     preventZoom();
     
-    showStartupScreen();
+    // Check if user has already completed setup
+    checkUserSetup();
 });
 
 function preventZoom() {
@@ -17,6 +18,19 @@ function preventZoom() {
         }
         lastTouchEnd = now;
     }, false);
+}
+
+function checkUserSetup() {
+    const petName = localStorage.getItem('petName');
+    const userName = localStorage.getItem('userName');
+    
+    if (petName && userName) {
+        console.log('User already setup, going to homepage');
+        window.location.href = 'homepage.html';
+    } else {
+        console.log('New user, showing startup sequence');
+        showStartupScreen();
+    }
 }
 
 function showStartupScreen() {
@@ -46,6 +60,5 @@ function startJourney() {
     
     console.log('Starting journey!');
     
-    // Navigate to naming screen
     window.location.href = 'name-pet.html';
 }

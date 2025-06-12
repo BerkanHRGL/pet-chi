@@ -13,6 +13,5 @@ function goToExplanation() {
     
     console.log('Going to explanation screen!');
     
-    // Navigate to explanation screen
     window.location.href = 'intro-explanation.html';
 }

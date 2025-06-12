@@ -10,48 +10,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
-    <title>Petchi - Home</title>
+    <title>Add Goal - Petchi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="screen homepage-screen active">
-        <div class="homepage-content">
+    <div class="screen add-goal-screen active">
+        <div class="add-goal-content">
             <div class="pet-display">
                 <div class="pet-background">
                     <img src="imgs/background-petchi.png" alt="Pet Home" class="background-image">
                 </div>
                 
                 <div class="pet-character">
-                    <img src="imgs/petchi-neutral.png" alt="Pet" class="pet-sprite" id="petSprite">
-                </div>
-                
-
-            </div>
-            
-            <div class="goals-section">
-                <div class="goals-header">
-                    <h3>Goals finished today</h3>
-                </div>
-                
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                        <span class="progress-text" id="progressText">0/3</span>
-                    </div>
-                </div>
-                
-                <div class="goals-list" id="goalsList">
+                    <img src="imgs/petchi-happy.png" alt="Pet" class="pet-sprite" id="petSprite">
                 </div>
             </div>
             
-            <div class="action-section">
-                <button class="add-goal-button" onclick="addNewGoal()">
-                    Add a goal
+            <div class="add-goal-section">
+                <h2 class="add-goal-title">Enter your new goal for today</h2>
+                
+                <div class="goal-input-container">
+                    <input 
+                        type="text" 
+                        id="goalInput" 
+                        class="goal-input" 
+                        placeholder="Drink water"
+                        maxlength="50"
+                    >
+                </div>
+                
+                <button class="add-button" id="addButton" onclick="addGoal()" disabled>
+                    Add
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="homepage.js"></script>
+    <script src="add-goal.js"></script>
 </body>
 </html>
