@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     preventZoom();
+    loadPetName();
 });
 
 function preventZoom() {
@@ -15,6 +16,21 @@ function preventZoom() {
         }
         lastTouchEnd = now;
     }, false);
+}
+
+function loadPetName() {
+    const petName = localStorage.getItem('petName') || 'Tommy';
+    
+    const introTitle = document.getElementById('introTitle');
+    const introDescription = document.getElementById('introDescription');
+    
+    if (introTitle) {
+        introTitle.textContent = `The better you do, the happier ${petName} gets!`;
+    }
+    
+    if (introDescription) {
+        introDescription.textContent = `${petName} loves watching you succeed! Add tasks to your list and complete them to see his mood brighten.`;
+    }
 }
 
 function goToMainApp() {

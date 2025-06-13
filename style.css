@@ -95,7 +95,7 @@ body.homepage-active {
     border: none;
     border-radius: 20px;
     padding: 16px 32px;
-    font-size: clamp(16px, 4vw, 18px);
+    font-size: clamp(18px, 4vw, 18px);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -104,6 +104,7 @@ body.homepage-active {
     margin-top: 200px;
     min-height: 44px;
     touch-action: manipulation;
+    font-family: paytone one, sans-serif;
 }
 
 .start-button:active {
@@ -157,16 +158,20 @@ body.homepage-active {
     color: #333;
     outline: none;
     transition: all 0.3s ease;
+
 }
 
 .name-input:focus {
     background-color: #e8e8e8;
     transform: scale(1.02);
+
 }
 
-.name-input::placeholder {
-    color: #999;
-    font-weight: 400;
+.name-pet-screen .name-input::placeholder,
+#petNameInput::placeholder {
+    color: #999 !important;
+    font-weight: 400 !important;
+
 }
 
 .button-section {
@@ -192,12 +197,14 @@ body.homepage-active {
 .next-button:active {
     transform: scale(0.96);
     background-color: #D4A853;
+
 }
 
 .next-button:disabled {
     background-color: #E8B86D;
     cursor: not-allowed;
     opacity: 0.5;
+
 }
 
 .name-pet-screen .pet-image {
@@ -491,27 +498,32 @@ body.homepage-active {
 
 .pet-character {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
 }
 
 .pet-sprite {
-    width: clamp(120px, 30vw, 160px);
-    height: clamp(120px, 30vw, 160px);
+    width: clamp(250px, 30vw, 160px);
+    height: clamp(250px, 30vw, 160px);
     object-fit: contain;
     transition: all 0.3s ease;
     animation: gentle-breathing 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+
 }
 
 .pet-sprite.happy {
     animation: happy-bounce 1s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+
 }
 
 .pet-sprite.sad {
     animation: sad-droop 2s ease-in-out infinite;
-    filter: brightness(0.8);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+
 }
 
 /* Goals Progress Section */
@@ -530,7 +542,7 @@ body.homepage-active {
 
 .goals-header h3 {
     font-size: clamp(16px, 4vw, 20px);
-    color: #333;
+    color: #ffffff;
     margin: 0 0 15px 0;
     text-align: center;
     font-weight: 600;
@@ -746,10 +758,18 @@ body.homepage-active {
 }
 
 .add-goal-content .pet-sprite {
-    width: clamp(120px, 30vw, 160px);
-    height: clamp(120px, 30vw, 160px);
+    width: clamp(250px, 25vw, 140px); /* Keep original sizing */
+    height: clamp(250px, 25vw, 140px);
     object-fit: contain;
     animation: gentle-breathing 3s ease-in-out infinite;
+}
+
+.add-goal-content .pet-character {
+    position: absolute;
+    top: 70%; /* Move the container down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 /* Add Goal Section */
