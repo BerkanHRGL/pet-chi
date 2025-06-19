@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="screen homepage-screen active">
+    <!-- Home Screen -->
+    <div class="screen homepage-screen active" id="homeScreen">
         <div class="homepage-content">
             <div class="pet-display">
                 <div class="pet-background">
@@ -24,8 +25,6 @@
                 <div class="pet-character">
                     <img src="imgs/petchi-neutral.png" alt="Pet" class="pet-sprite" id="petSprite">
                 </div>
-                
-
             </div>
             
             <div class="goals-section">
@@ -51,6 +50,87 @@
             </div>
         </div>
     </div>
+
+    <!-- Learning Screen -->
+    <div class="learning-screen hidden" id="learningScreen">
+        <div class="learning-content">
+            <div class="learning-header">
+                <h1 class="learning-title">Grow with Others</h1>
+                <p class="learning-subtitle">Discover productivity tips and techniques to help you and your pet thrive</p>
+            </div>
+            
+<div class="articles-container" id="articlesContainer">
+    <div class="article-card" onclick="openArticle('https://www.simplilearn.com/best-productivity-hacks-to-get-more-done-article')">
+        <span class="article-tag">PRODUCTIVITY</span>
+        <h3 class="article-title">30 Productivity Hacks That Actually Work in 2025</h3>
+        <p class="article-description">Discover proven productivity strategies to help you work more efficiently and create more free time in your day.</p>
+        <div class="article-meta">
+            <span class="read-time">8 min read</span>
+            <span>🔥 Trending</span>
+        </div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('https://www.productiveblogging.com/productivity-habits/')">
+        <span class="article-tag">HABITS</span>
+        <h3 class="article-title">21 Habits That Will Boost Your Productivity</h3>
+        <p class="article-description">Learn powerful habits that successful people use to massively increase their productivity and achieve their goals.</p>
+        <div class="article-meta">
+            <span class="read-time">12 min read</span>
+            <span>📊 Data-driven</span>
+        </div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('https://textexpander.com/blog/productivity-hacks')">
+        <span class="article-tag">TIME MANAGEMENT</span>
+        <h3 class="article-title">Top 23 Productivity Hacks for 2025</h3>
+        <p class="article-description">Master time management with proven techniques like the Pomodoro method, time blocking, and task batching.</p>
+        <div class="article-meta">
+            <span class="read-time">10 min read</span>
+            <span>⏰ Time-tested</span>
+        </div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('https://agemate.com/en-us/blogs/news/building-new-and-lasting-habits-in-2025')">
+        <span class="article-tag">GOAL SETTING</span>
+        <h3 class="article-title">Building New and Lasting Habits in 2025</h3>
+        <p class="article-description">Science-backed techniques to create behaviors that stick, from micro-habits to habit stacking strategies.</p>
+        <div class="article-meta">
+            <span class="read-time">6 min read</span>
+            <span>🧠 Science-based</span>
+        </div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('https://juliety.com/productivity-tips')">
+        <span class="article-tag">LIFESTYLE</span>
+        <h3 class="article-title">100 Productivity Tips for Your Best Year Yet</h3>
+        <p class="article-description">A comprehensive guide covering time management, planning, mindset, and workflow optimization strategies.</p>
+        <div class="article-meta">
+            <span class="read-time">15 min read</span>
+            <span>📚 Complete guide</span>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-item active" onclick="switchToHome()">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="nav-label">Home</span>
+            </div>
+            
+            <div class="nav-item" onclick="switchToLearning()">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <span class="nav-label">Learn</span>
+            </div>
+        </div>
+    </nav>
 
     <script src="homepage.js"></script>
 </body>
