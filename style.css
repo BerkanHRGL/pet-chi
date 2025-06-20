@@ -615,9 +615,41 @@ body.homepage-active {
     transition: all 0.2s ease;
 }
 
+.goal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
 .goal-item.completed {
     background-color: #f8f8f8;
     opacity: 0.8;
+}
+
+.delete-goal-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    background: transparent;
+}
+
+.delete-goal-btn:hover {
+    opacity: 1;
+    background: rgba(255, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.delete-goal-btn:active {
+    transform: scale(0.9);
+    background: rgba(255, 0, 0, 0.2);
 }
 
 .goal-text {
@@ -627,6 +659,7 @@ body.homepage-active {
     font-weight: 500;
     flex: 1;
     margin: 0;
+    margin-right: 15px; 
 }
 
 .goal-item.completed .goal-text {
@@ -1027,9 +1060,104 @@ body.homepage-active {
     font-weight: 500;
 }
 
-/* Hidden class for screen switching */
 .hidden {
     display: none !important;
+}
+
+
+.article-card.article-read {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #4CAF50;
+}
+
+.article-card.article-read .article-title {
+    color: #666;
+}
+
+.article-card.article-read .article-description {
+    color: #888;
+}
+
+.read-checkmark {
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+    animation: checkmark-appear 0.3s ease-in-out;
+    flex-shrink: 0;
+}
+
+
+@keyframes slideDown {
+    0% {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* Checkmark animation */
+@keyframes checkmark-appear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hover effects for read articles */
+.article-card.article-read:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Optional: Different styling for completely read articles */
+.article-card.article-read::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 15px 15px 0 0;
+}
+
+/* Stats section styling */
+.reading-stats {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-family: 'Pavanam', sans-serif;
 }
 
 /* Mobile optimizations */
@@ -1159,6 +1287,22 @@ body.homepage-active {
     
     .pet-image:hover {
         transform: none;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .goal-actions {
+        gap: 8px;
+    }
+    
+    .delete-goal-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+    }
+    
+    .goal-text {
+        margin-right: 10px;
     }
 }
 

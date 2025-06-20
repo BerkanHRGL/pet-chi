@@ -1,10 +1,79 @@
+const DAILY_GOALS_KEY = 'petchi_daily_goals';
+const LAST_RESET_KEY = 'petchi_last_reset';
+const READ_ARTICLES_KEY = 'petchi_read_articles';
+const REDDIT_CONFIG = {
+    subreddits: ['productivity', 'getmotivated', 'selfimprovement', 'habits', 'timemanagement'],
+    limit: 10,
+    timeFilter: 'week'
+};
+const ARTICLE_CACHE_KEY = 'petchi_daily_articles';
+const CACHE_DURATION = 24 * 60 * 60 * 1000;
+
+function getTodayDateString() {
+    const today = new Date();
+    return `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+}
+
+function checkAndResetDaily() {
+    const today = getTodayDateString();
+    const lastReset = localStorage.getItem(LAST_RESET_KEY);
+    
+    if (lastReset !== today) {
+        console.log('🌅 New day detected! Resetting goals...');
+        
+        const goals = JSON.parse(localStorage.getItem('goals')) || [];
+        const resetGoals = goals.map(goal => ({
+            ...goal,
+            completed: false
+        }));
+        
+        localStorage.setItem('goals', JSON.stringify(resetGoals));
+        localStorage.setItem(LAST_RESET_KEY, today);
+        localStorage.setItem('currentProgress', JSON.stringify({completed: 0, total: resetGoals.length}));
+        
+        return true;
+    }
+    
+    return false;
+}
+
+function showDailyResetMessage() {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-family: 'Pavanam', sans-serif;
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        animation: slideDown 0.3s ease;
+    `;
+    notification.innerHTML = '🌅 New day, fresh start! Goals reset for today';
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideUp 0.3s ease';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     preventZoom();
     loadPetData();
     loadGoalsProgress();
     updatePetMood();
     
-    // Enable scrolling for homepage
     document.body.classList.add('homepage-active');
     
     if (!document.getElementById('learningScreen').classList.contains('hidden')) {
@@ -34,12 +103,18 @@ function loadPetData() {
 }
 
 function loadGoalsProgress() {
+    const wasReset = checkAndResetDaily();
+    
     const goals = JSON.parse(localStorage.getItem('goals')) || [];
     const completedGoals = goals.filter(goal => goal.completed).length;
     const totalGoals = goals.length;
     
     updateProgressDisplay(completedGoals, totalGoals);
     displayGoalsList(goals);
+    
+    if (wasReset && goals.length > 0) {
+        showDailyResetMessage();
+    }
 }
 
 function updateProgressDisplay(completed, total) {
@@ -86,8 +161,12 @@ function displayGoalsList(goals) {
         
         goalItem.innerHTML = `
             <p class="goal-text">${goal.text}</p>
-            <div class="goal-checkbox" onclick="toggleGoal(${goal.id})">
-                <!-- Empty checkbox since these are all incomplete -->
+            <div class="goal-actions">
+                <div class="delete-goal-btn" onclick="deleteGoal(${goal.id})" title="Delete goal">
+                    ❌
+                </div>
+                <div class="goal-checkbox" onclick="toggleGoal(${goal.id})">
+                </div>
             </div>
         `;
         
@@ -95,7 +174,26 @@ function displayGoalsList(goals) {
     });
 }
 
+function deleteGoal(goalId) {
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    
+        let goals = JSON.parse(localStorage.getItem('goals')) || [];
+        
+        goals = goals.filter(goal => goal.id !== goalId);
+        
+        localStorage.setItem('goals', JSON.stringify(goals));
+        
+        loadGoalsProgress();
+        updatePetMood();
+        
+        console.log('🗑️ Goal deleted:', goalId);
+}
+
 function toggleGoal(goalId) {
+    event.stopPropagation();
+    
     if (navigator.vibrate) {
         navigator.vibrate(30);
     }
@@ -154,18 +252,89 @@ function switchToHome() {
     updatePetMood();
 }
 
+function switchToLearning() {
+    if (navigator.vibrate) {
+        navigator.vibrate(30);
+    }
+    
+    document.getElementById('homeScreen').classList.add('hidden');
+    document.getElementById('learningScreen').classList.remove('hidden');
+    
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item[onclick="switchToLearning()"]').classList.add('active');
+    
+    renderDailyArticles();
+}
 
-// Configuration
-const REDDIT_CONFIG = {
-    subreddits: ['productivity', 'getmotivated', 'selfimprovement', 'habits', 'timemanagement'],
-    limit: 10,
-    timeFilter: 'week'
-};
+function getReadArticles() {
+    try {
+        const readArticles = localStorage.getItem(READ_ARTICLES_KEY);
+        return readArticles ? JSON.parse(readArticles) : [];
+    } catch (error) {
+        console.error('Error loading read articles:', error);
+        return [];
+    }
+}
 
-const ARTICLE_CACHE_KEY = 'petchi_daily_articles';
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+function markArticleAsRead(articleUrl) {
+    try {
+        const readArticles = getReadArticles();
+        
+        if (!readArticles.includes(articleUrl)) {
+            readArticles.push(articleUrl);
+            localStorage.setItem(READ_ARTICLES_KEY, JSON.stringify(readArticles));
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(20);
+            }
+            
+            console.log('Marked as read:', articleUrl);
+        }
+    } catch (error) {
+        console.error('Error marking article as read:', error);
+    }
+}
 
-// Function to fetch articles from Reddit
+function isArticleRead(articleUrl) {
+    const readArticles = getReadArticles();
+    return readArticles.includes(articleUrl);
+}
+
+function updateArticleReadStatus(articleUrl) {
+    const articleCards = document.querySelectorAll('.article-card');
+    
+    articleCards.forEach(card => {
+        const cardUrl = card.getAttribute('data-url');
+        if (cardUrl === articleUrl) {
+            card.classList.add('article-read');
+            
+            let checkmark = card.querySelector('.read-checkmark');
+            if (!checkmark) {
+                checkmark = document.createElement('div');
+                checkmark.className = 'read-checkmark';
+                checkmark.innerHTML = '✓';
+                
+                const topSection = card.querySelector('.article-card-header') || card.firstElementChild;
+                if (topSection) {
+                    topSection.appendChild(checkmark);
+                }
+            }
+            
+            checkmark.style.display = 'block';
+        }
+    });
+}
+
+function openArticle(articleUrl) {
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    
+    markArticleAsRead(articleUrl);
+    updateArticleReadStatus(articleUrl);
+    window.open(articleUrl, '_blank');
+}
+
 async function fetchRedditArticles() {
     try {
         const allArticles = [];
@@ -295,9 +464,7 @@ async function getDailyArticles() {
     }
     
     const freshArticles = await fetchRedditArticles();
-    
     setCachedArticles(freshArticles);
-    
     return freshArticles;
 }
 
@@ -305,7 +472,12 @@ async function renderDailyArticles() {
     const articlesContainer = document.getElementById('articlesContainer');
     if (!articlesContainer) return;
     
-    articlesContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">Loading fresh articles...</div>';
+    articlesContainer.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #666;">
+            <div style="font-size: 24px; margin-bottom: 10px;">📚</div>
+            <div>Loading articles...</div>
+        </div>
+    `;
     
     try {
         const articles = await getDailyArticles();
@@ -313,12 +485,18 @@ async function renderDailyArticles() {
         articlesContainer.innerHTML = '';
         
         articles.forEach(article => {
+            const isRead = isArticleRead(article.url);
+            
             const articleCard = document.createElement('div');
-            articleCard.className = 'article-card';
+            articleCard.className = `article-card ${isRead ? 'article-read' : ''}`;
+            articleCard.setAttribute('data-url', article.url);
             articleCard.onclick = () => openArticle(article.url);
             
             articleCard.innerHTML = `
-                <span class="article-tag">${article.tag}</span>
+                <div class="article-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; position: relative;">
+                    <span class="article-tag">${article.tag}</span>
+                    <div class="read-checkmark" style="display: ${isRead ? 'block' : 'none'};">✓</div>
+                </div>
                 <h3 class="article-title">${article.title}</h3>
                 <p class="article-description">${article.description}</p>
                 <div class="article-meta">
@@ -329,45 +507,20 @@ async function renderDailyArticles() {
             
             articlesContainer.appendChild(articleCard);
         });
+        
+        const totalArticles = articles.length;
+        const readCount = articles.filter(article => isArticleRead(article.url)).length;
+        
+        if (readCount > 0) {
+            const statsDiv = document.createElement('div');
+            statsDiv.style.cssText = 'text-align: center; margin-top: 20px; color: rgba(255,255,255,0.8); font-size: 14px;';
+            statsDiv.innerHTML = `📖 You've read ${readCount} of ${totalArticles} articles today`;
+            articlesContainer.appendChild(statsDiv);
+        }
         
     } catch (error) {
         console.error('Error rendering articles:', error);
-        // Show fallback articles
-        const fallbackArticles = getFallbackArticles();
-        articlesContainer.innerHTML = '';
-        
-        fallbackArticles.forEach(article => {
-            const articleCard = document.createElement('div');
-            articleCard.className = 'article-card';
-            articleCard.onclick = () => openArticle(article.url);
-            
-            articleCard.innerHTML = `
-                <span class="article-tag">${article.tag}</span>
-                <h3 class="article-title">${article.title}</h3>
-                <p class="article-description">${article.description}</p>
-                <div class="article-meta">
-                    <span class="read-time">${article.readTime}</span>
-                    <span>${article.meta}</span>
-                </div>
-            `;
-            
-            articlesContainer.appendChild(articleCard);
-        });
     }
-}
-
-function switchToLearning() {
-    if (navigator.vibrate) {
-        navigator.vibrate(30);
-    }
-    
-    document.getElementById('homeScreen').classList.add('hidden');
-    document.getElementById('learningScreen').classList.remove('hidden');
-    
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item[onclick="switchToLearning()"]').classList.add('active');
-    
-    renderDailyArticles();
 }
 
 function refreshArticles() {
@@ -375,12 +528,40 @@ function refreshArticles() {
     renderDailyArticles();
 }
 
-function openArticle(url) {
-    if (navigator.vibrate) {
-        navigator.vibrate(50);
-    }
+function clearReadHistory() {
+    localStorage.removeItem(READ_ARTICLES_KEY);
+    console.log('🗑️ Cleared read history');
+    renderDailyArticles();
+}
+
+function getReadingStats() {
+    const readArticles = getReadArticles();
+    return {
+        totalRead: readArticles.length,
+        readToday: readArticles.length,
+        readUrls: readArticles
+    };
+}
+
+function manualResetGoals() {
+    localStorage.removeItem(LAST_RESET_KEY);
+    loadGoalsProgress();
+    console.log('🔄 Manually triggered daily reset');
+}
+
+function getDailyStats() {
+    const today = getTodayDateString();
+    const lastReset = localStorage.getItem(LAST_RESET_KEY);
+    const goals = JSON.parse(localStorage.getItem('goals')) || [];
+    const completed = goals.filter(goal => goal.completed).length;
     
-    window.open(url, '_blank');
+    return {
+        date: today,
+        isToday: lastReset === today,
+        totalGoals: goals.length,
+        completedGoals: completed,
+        completionRate: goals.length > 0 ? Math.round((completed / goals.length) * 100) : 0
+    };
 }
 
 document.addEventListener('keydown', function(e) {
@@ -413,4 +594,3 @@ window.petchiApp = {
     refreshProgress: refreshProgress,
     updatePetMood: updatePetMood
 };
-
