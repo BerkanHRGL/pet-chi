@@ -138,13 +138,13 @@ function updatePetMood() {
     const completionRate = progress.total > 0 ? progress.completed / progress.total : 0;
     
     if (completionRate >= 0.8) {
-        petSprite.src = 'imgs/petchi-happy.png';
+        petSprite.src = '../assets/images/petchi-happy.png';
         petSprite.classList.add('happy');
     } else if (completionRate <= 0.2 && progress.total > 0) {
-        petSprite.src = 'imgs/petchi-sad.png';
+        petSprite.src = '../assets/images/petchi-sad.png';
         petSprite.classList.add('sad');
     } else {
-        petSprite.src = 'imgs/petchi-neutral.png';
+        petSprite.src = '../assets/images/petchi-neutral.png';
         petSprite.classList.add('neutral');
     }
 }

@@ -11,19 +11,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
     <title>Petchi - Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <div class="app-container">
+    <div class="page-scroll">
     <!-- Home Screen -->
     <div class="screen homepage-screen active" id="homeScreen">
         <div class="homepage-content">
             <div class="pet-display">
                 <div class="pet-background">
-                    <img src="imgs/background-petchi.png" alt="Pet Home" class="background-image">
+                    <img src="../assets/images/background-petchi.png" alt="Pet Home" class="background-image">
                 </div>
-                
+
                 <div class="pet-character">
-                    <img src="imgs/petchi-neutral.png" alt="Pet" class="pet-sprite" id="petSprite">
+                    <img src="../assets/images/petchi-neutral.png" alt="Pet" class="pet-sprite" id="petSprite">
                 </div>
             </div>
             
@@ -112,6 +114,7 @@
 </div>
         </div>
     </div>
+    </div><!-- end page-scroll -->
 
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -131,7 +134,8 @@
             </div>
         </div>
     </nav>
+    </div>
 
-    <script src="homepage.js"></script>
+    <script src="../js/homepage.js"></script>
 </body>
 </html>

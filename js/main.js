@@ -26,7 +26,7 @@ function checkUserSetup() {
     
     if (petName && userName) {
         console.log('User already setup, going to homepage');
-        window.location.href = 'homepage.html';
+        window.location.href = 'pages/homepage.html';
     } else {
         console.log('New user, showing startup sequence');
         showStartupScreen();
@@ -60,5 +60,5 @@ function startJourney() {
     
     console.log('Starting journey!');
     
-    window.location.href = 'name-pet.html';
+    window.location.href = 'pages/name-pet.html';
 }

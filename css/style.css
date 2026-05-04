@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Pavanam';
-    src: url('fonts/Pavanam-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/Pavanam-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -19,19 +19,43 @@ body {
     -webkit-user-select: none;
     user-select: none;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
 }
 
 body.homepage-active {
+    overflow: hidden;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    transform: translate(0);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-scroll {
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
 }
 
 .screen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -450,10 +474,11 @@ body.homepage-active {
     background: #F7835A;
     position: static;
     height: auto;
-    min-height: 100vh;
+    min-height: 100%;
     overflow-y: visible;
     padding: 0;
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    padding-bottom: 20px;
+    align-items: flex-start;
 
 }
 
@@ -463,7 +488,7 @@ body.homepage-active {
     width: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
     justify-content: flex-start;
     gap: 0;
     margin: 0;
@@ -476,7 +501,7 @@ body.homepage-active {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
     height: 60vh;
     max-height: none;
     margin: 0;
@@ -738,20 +763,21 @@ body.homepage-active {
 /* Add Goal Screen */
 .add-goal-screen {
     background: #F7835A;
-    position: static; 
+    position: static;
     height: auto;
-    min-height: 100vh;
+    min-height: 100%;
+    align-items: flex-start;
     overflow-y: visible;
     padding: 0;
 }
 
 .add-goal-content {
     padding: 0;
-    max-width: 100%; 
+    max-width: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
     justify-content: flex-start;
     gap: 0;
     margin: 0; 
@@ -764,8 +790,8 @@ body.homepage-active {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw; 
-    height: 60vh; 
+    width: 100%;
+    height: 60vh;
     max-height: none; 
     margin: 0;
     padding: 0; 
@@ -896,16 +922,13 @@ body.homepage-active {
 }
 
 .navbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    flex-shrink: 0;
     background: #EC6E4B;
     border-top: 1px solid #e0e0e0;
     padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
     z-index: 1000;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    
 }
 
 .navbar-container {
@@ -966,9 +989,9 @@ body.homepage-active {
     background: #F7835A;
     position: static;
     height: auto;
-    min-height: 100vh;
+    min-height: 100%;
     overflow-y: visible;
-    padding: 20px 0 calc(100px + env(safe-area-inset-bottom));
+    padding: 20px 0;
 }
 
 .learning-content {
@@ -1334,5 +1357,27 @@ body.homepage-active {
 @media screen and (max-width: 360px) {
     .welcome-content {
         padding: 20px 10px;
+    }
+}
+
+@media (min-width: 431px) {
+    body {
+        background-color: #1a1a1a;
+        align-items: center;
+    }
+
+    .app-container {
+        max-width: 430px;
+        height: 90dvh;
+        max-height: 880px;
+        border-radius: 40px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .pet-display,
+    .add-goal-content .pet-display {
+        height: 42dvh;
+        max-height: 380px;
     }
 }
